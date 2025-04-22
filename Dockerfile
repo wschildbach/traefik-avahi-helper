@@ -1,8 +1,8 @@
-FROM python:3.10.10-alpine3.17 as base
+FROM python:3.13-alpine3.21 as base
 LABEL maintainer="Ben Hardill hardillb@gmail.com"
 RUN apk add --no-cache --update  \
   dbus-libs \
-  'nodejs<19'
+  'nodejs<23'
 
 # Install dependencies
 FROM base as compile-image
@@ -17,7 +17,7 @@ RUN apk add --no-cache --update \
     dbus-dev \
     glib-dev \
     ninja \
-    'npm<10' && \
+    'npm<11' && \
   pip install --upgrade --no-cache-dir pip
 
 RUN pip install --user --no-cache-dir mdns-publisher
