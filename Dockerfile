@@ -28,6 +28,9 @@ RUN npm ci --omit=dev
 # Build application
 FROM base as build-image
 
+ARG UID=1000
+ARG GID=1000
+
 WORKDIR /usr/src/app
 
 # app
@@ -39,5 +42,10 @@ COPY --from=compile-image /root/.local /root/.local
 ENV PATH=/root/.local/bin:/usr/src/app:$PATH
 
 WORKDIR /tmp
+
+RUN addgroup -S -g $GID runner 2>/dev/null && \
+    adduser  -S -u $UID -D -H -h /tmp -s /sbin/nologin -G runner -g runnner runner 2>/dev/null
+
+USER runner
 
 CMD ["node", "/usr/src/app/index.js"]
