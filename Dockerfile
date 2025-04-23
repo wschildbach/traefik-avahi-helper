@@ -36,6 +36,8 @@ COPY cname.py index.js ./
 COPY --from=compile-image /usr/src/app/node_modules node_modules
 # pip packages
 COPY --from=compile-image /root/.local /root/.local
-ENV PATH=/root/.local/bin:$PATH
+ENV PATH=/root/.local/bin:/usr/src/app:$PATH
 
-CMD ["node", "index.js"]
+WORKDIR /tmp
+
+CMD ["node", "/usr/src/app/index.js"]

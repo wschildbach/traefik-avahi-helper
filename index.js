@@ -30,11 +30,11 @@ docker.listContainers()
     }
   }
   console.log(cnames)
-  fs.writeFile("cnames",cnames.join('\n'), 'utf8', err => {}) 
+  fs.writeFile("/tmp/cnames",cnames.join('\n'), 'utf8', err => {})
 
   nodemon({
-    watch: "cnames",
-    script: "cname.py",
+    watch: "/tmp/cnames",
+    script: "/usr/src/app/cname.py",
     execMap: {
       "py": "python"
     }

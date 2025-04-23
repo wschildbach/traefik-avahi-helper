@@ -54,12 +54,12 @@ def handle_signals(publisher, signum, frame):
 def main():
 
     pid = os.getpid()
-    f = open("cname.pid", "w")
+    f = open("/tmp/cname.pid", "w")
     f.write(str(pid))
     f.close()
 
-    cnames = [line.rstrip('\n') for line in open("cnames")]
-    
+    cnames = [line.rstrip('\n') for line in open("/tmp/cnames")]
+
     handler = logging.StreamHandler(sys.stderr)
     format_string = "%(levelname)s: %(message)s"
 
